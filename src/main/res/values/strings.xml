@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">M250L Tools</string>
+    <string name="title_backup_nv_data">Backup nv_data.bin to sdcard</string>
+    <string name="title_write_esn">Write ESN</string>
+    <string name="title_reboot">Reboot</string>
+    <string name="change_esn_label">ESN</string>
+    <string name="change_esn_ok">Write</string>
+    <string name="change_esn_write_ok">Write OK.</string>
+    <string name="change_esn_bad">Not correct ESN</string>
+    <string name="backup_nv_data_ok">Backup nv_data ok</string>
+
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">M250L 工具</string>
+    <string name="title_backup_nv_data">备份nv_data.bin到内部存储卡</string>
+    <string name="title_write_esn">ESN 写入</string>
+    <string name="change_esn_label">ESN</string>
+    <string name="change_esn_ok">写入</string>
+    <string name="change_esn_write_ok">ESN已写入</string>
+    <string name="change_esn_bad">ESN 格式不正确</string>
+    <string name="backup_nv_data_ok">nv_data 已备份到内部存储卡</string>
+
+</resources>

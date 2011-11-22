@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dip">
+
+    <TextView android:id="@+id/change_esn_label"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/change_esn_label"/>
+
+    <EditText android:id="@+id/change_esn_entry"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/change_esn_label"/>
+
+    <Button
+            android:id="@+id/change_esn_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/change_esn_entry"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dip"
+            android:text="@string/change_esn_ok"/>
+
+
+</RelativeLayout>
