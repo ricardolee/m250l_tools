@@ -10,21 +10,6 @@ object Utility {
 
   val esnPattern = """^[0-9A-Fa-f]{8}"""
 
-  val runtime = Runtime.getRuntime
-
-  def sudo(cmd: String) {
-    val process = runtime.exec("su")
-    val writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream))
-    writer.write(cmd)
-    writer.flush()
-    writer.write("exit\n")
-    writer.flush()
-    val res = process.waitFor
-    if (res != 0) {
-      throw new RuntimeException("Execution of cmd '%s' failed with exit code %d".format(cmd, res))
-    }
-  }
-
   def hex2long(hex: String) = {
     val high = Integer.valueOf(hex.substring(0, 4), 16).longValue
     val low = Integer.valueOf(hex.substring(4, 8), 16).longValue
