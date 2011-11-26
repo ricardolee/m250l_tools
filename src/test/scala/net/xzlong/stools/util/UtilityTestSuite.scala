@@ -1,8 +1,8 @@
-package net.xzlong.stools.utilies
+package net.xzlong.stools.util
 
 import org.scalatest.Suite
 
-import Utility._
+import Utils._
 import io.Source
 import java.io.{RandomAccessFile, File, FileOutputStream, ByteArrayOutputStream}
 

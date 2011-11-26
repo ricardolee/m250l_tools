@@ -1,4 +1,4 @@
-package net.xzlong.stools.utilies
+package net.xzlong.stools.util
 
 import java.io.{RandomAccessFile, File, OutputStreamWriter, BufferedWriter}
 
@@ -6,7 +6,7 @@ import java.io.{RandomAccessFile, File, OutputStreamWriter, BufferedWriter}
 /*
   The length of hex string must be eight.
  */
-object Utility {
+object Utils {
 
   val esnPattern = """^[0-9A-Fa-f]{8}"""
 
