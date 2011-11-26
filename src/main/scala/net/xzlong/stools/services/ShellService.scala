@@ -13,9 +13,9 @@ class ShellService extends Service {
 
   private val runtime = Runtime.getRuntime
   private val process = runtime.exec("su")
-  val shellWriter = new OutputStreamWriter(process.getOutputStream)
-  val shellInputStream = process.getInputStream;
-  val shellErrorStream = process.getErrorStream
+  private val shellWriter = new OutputStreamWriter(process.getOutputStream)
+  private val shellInputStream = process.getInputStream;
+  private val shellErrorStream = process.getErrorStream
   private val DEBUG_KEY = "ShellService"
 
   def sudo(cmd: String) = {
@@ -53,11 +53,11 @@ class ShellService extends Service {
 
 }
 
-trait ActivityMixinShellService extends Activity {
-  context =>
+protected trait MixinShellServiceBase {
+
   lazy val shellService = shellServiceHolder
-  private var shellServiceHolder: ShellService = null
-  private val con = new ServiceConnection {
+  protected var shellServiceHolder: ShellService = null
+  protected val con = new ServiceConnection {
     def onServiceConnected(className: ComponentName, binder: IBinder) {
       shellServiceHolder = binder.asInstanceOf[ShellService#ShellServiceBinder].getService
     }
@@ -65,8 +65,27 @@ trait ActivityMixinShellService extends Activity {
     def onServiceDisconnected(className: ComponentName) {}
   }
 
+}
+
+trait ActivityMixinShellService extends Activity with MixinShellServiceBase {
+  context =>
+
   abstract override def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
+    bindService(new Intent(context, classOf[ShellService]), con, Context.BIND_AUTO_CREATE)
+  }
+
+  abstract override def onDestroy() {
+    unbindService(con)
+    super.onDestroy()
+  }
+}
+
+trait ServiceMixinShellService extends Service with MixinShellServiceBase {
+  context =>
+
+  abstract override def onCreate() {
+    super.onCreate()
     bindService(new Intent(context, classOf[ShellService]), con, Context.BIND_AUTO_CREATE)
   }
 
