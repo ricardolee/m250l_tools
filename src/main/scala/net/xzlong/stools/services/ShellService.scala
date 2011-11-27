@@ -18,10 +18,15 @@ class ShellService extends Service {
   private val shellErrorStream = process.getErrorStream
   private val DEBUG_KEY = "ShellService"
 
-  def sudo(cmd: String) = {
+  def sudo(cmd: String, milliesForWait: Long = 0) = {
     shellWriter.write(cmd)
     shellWriter.flush()
     Log.d(DEBUG_KEY, "Run cmd : " + cmd)
+    if (milliesForWait != 0)
+      synchronized {
+        wait(milliesForWait)
+      }
+
     val la = shellInputStream.available
     val ea = shellErrorStream.available
     val ls = if (la != 0) {
@@ -41,6 +46,7 @@ class ShellService extends Service {
 
   override def onDestroy() {
     sudo("exit\n")
+    process.waitFor()
     process.destroy()
     super.onDestroy()
   }
@@ -55,9 +61,11 @@ class ShellService extends Service {
 
 protected trait MixinShellServiceBase {
 
-  lazy val shellService = shellServiceHolder
-  protected var shellServiceHolder: ShellService = null
-  protected val con = new ServiceConnection {
+  lazy val shellService = {
+    assert(shellServiceHolder != null); shellServiceHolder
+  }
+  private var shellServiceHolder: ShellService = null
+  protected val shellServiceConnection = new ServiceConnection {
     def onServiceConnected(className: ComponentName, binder: IBinder) {
       shellServiceHolder = binder.asInstanceOf[ShellService#ShellServiceBinder].getService
     }
@@ -72,11 +80,11 @@ trait ActivityMixinShellService extends Activity with MixinShellServiceBase {
 
   abstract override def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
-    bindService(new Intent(context, classOf[ShellService]), con, Context.BIND_AUTO_CREATE)
+    bindService(new Intent(context, classOf[ShellService]), shellServiceConnection, Context.BIND_AUTO_CREATE)
   }
 
   abstract override def onDestroy() {
-    unbindService(con)
+    unbindService(shellServiceConnection)
     super.onDestroy()
   }
 }
@@ -86,11 +94,11 @@ trait ServiceMixinShellService extends Service with MixinShellServiceBase {
 
   abstract override def onCreate() {
     super.onCreate()
-    bindService(new Intent(context, classOf[ShellService]), con, Context.BIND_AUTO_CREATE)
+    bindService(new Intent(context, classOf[ShellService]), shellServiceConnection, Context.BIND_AUTO_CREATE)
   }
 
   abstract override def onDestroy() {
-    unbindService(con)
+    unbindService(shellServiceConnection)
     super.onDestroy()
   }
 }

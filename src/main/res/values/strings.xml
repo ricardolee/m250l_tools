@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">M250L Tools</string>
-    <string name="title_backup_nv_data">Backup nv_data.bin to sdcard</string>
+    <string name="title_backup_nv_data">Backup nv_data.bin</string>
+    <string name="title_read_esn">Current Esn</string>
     <string name="title_write_esn">Write ESN</string>
+    <string name="title_flash_zImage">Flash zImage</string>
+    <string name="title_backup_zImage">Backup zImage</string>
     <string name="title_reboot">Reboot</string>
+    <string name="title_reboot_recovery">Reboot to recovery</string>
+    <string name="title_reboot_download">Reboot to download</string>
     <string name="change_esn_label">ESN</string>
     <string name="change_esn_ok">Write</string>
     <string name="change_esn_write_ok">Write OK.</string>
     <string name="change_esn_bad">Not correct ESN</string>
-    <string name="backup_nv_data_ok">Backup nv_data ok</string>
-
+    <string name="backup_nv_data_ok">Backup nv_data OK</string>
+    <string name="flash_zImage_ok">Flash zImage OK</string>
+    <string name="zImage_not_exist">zImage not exist in internal sd card</string>
+    <string name="zImage_backup_ok">Backup zImage OK</string>
+    <string name="sdcard_not_mount">Sdcard not mount</string>
 </resources>
