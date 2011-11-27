@@ -6,7 +6,7 @@ object BuildSettings {
   val settings = Seq(
     name := "stools",
     organization := "net.xzlong.android",
-    version := "0.1-SNAPSHOT",
+    version := "0.2-SNAPSHOT",
     scalaVersion := "2.8.2",
     scalacOptions ++= Seq("-deprecation", "-unchecked"),
     platformName in Android := "android-10",
